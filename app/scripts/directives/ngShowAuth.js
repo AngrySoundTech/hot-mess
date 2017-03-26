@@ -7,7 +7,7 @@
  * to be initialized so there is no initial flashing of incorrect state.
  */
 angular.module('hotMessApp')
-  .directive('ngShowAuth', ['Auth', '$timeout', function (Auth, $timeout) {
+  .directive('ngShowAuth', ['auth', '$timeout', function (auth, $timeout) {
     'use strict';
 
     return {
@@ -19,11 +19,11 @@ angular.module('hotMessApp')
           // sometimes if ngCloak exists on same element, they argue, so make sure that
           // this one always runs last for reliability
           $timeout(function () {
-            el.toggleClass('ng-cloak', !Auth.$getAuth());
+            el.toggleClass('ng-cloak', !auth.$getAuth());
           }, 0);
         }
 
-        Auth.$onAuth(update);
+        auth.$onAuthStateChanged(update);
         update();
       }
     };

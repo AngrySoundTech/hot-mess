@@ -7,12 +7,33 @@
  * Provides rudimentary account management functions.
  */
 angular.module('hotMessApp')
-  .controller('AccountCtrl', function ($scope, user, Auth, Ref, $firebaseObject, $timeout) {
-    $scope.user = user;
-    $scope.logout = function() { Auth.$unauth(); };
-    $scope.messages = [];
-    var profile = $firebaseObject(Ref.child('users/'+user.uid));
-    profile.$bindTo($scope, 'profile');
+  .controller('AccountCtrl', ["$scope", "auth", "currentAuth", function (
+    $scope,
+    auth,
+    currentAuth
+  
+  ) {
+
+  $scope.user = {
+    uid: currentAuth.uid,
+    name: currentAuth.displayName,
+    photo: currentAuth.photoURL,
+    email: currentAuth.email
+  };
+
     
 
-  });
+  $scope.updateProfile = function(name, imgUrl) {
+    firebase.auth().currentUser.updateProfile({
+      displayName: name,
+      photoURL: imgUrl
+    })
+      .then(function () {
+        console.log("updated");
+      })
+      .catch(function (error) {
+        console.log("error ", error);
+      })
+  };
+
+  }]);

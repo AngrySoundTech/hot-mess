@@ -1,3 +1,4 @@
+// Generated on 2017-03-26 using generator-angularfire-express 1.1.2
 'use strict';
 
 // # Globbing
@@ -36,8 +37,12 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: 35729
         }
+      },
+      jsTest: {
+        files: ['test/spec/{,*/}*.js'],
+        tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -48,7 +53,7 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: 35729
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
@@ -57,7 +62,7 @@ module.exports = function (grunt) {
         ]
       }
     },
-
+    
     // The actual grunt server settings
     connect: {
       options: {
@@ -108,6 +113,7 @@ module.exports = function (grunt) {
         }
       }
     },
+    
 
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
@@ -172,12 +178,25 @@ module.exports = function (grunt) {
 
     // Automatically inject Bower components into the app
     wiredep: {
-      options: {
-        cwd: ''
-      },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
         ignorePath:  /\.\.\//
+      },
+      test: {
+        devDependencies: true,
+        src: '<%= karma.unit.configFile %>',
+        ignorePath:  /\.\.\//,
+        fileTypes:{
+          js: {
+            block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
+              detect: {
+                js: /'(.*\.js)'/gi
+              },
+              replace: {
+                js: '\'{{filePath}}\','
+              }
+            }
+          }
       },
       sass: {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -284,6 +303,17 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
+    imagemin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: ['**/*.{png,jpg,jpeg,gif}'],
+          dest: '<%= yeoman.dist %>/images'
+        }]
+      }
+    },
+
     svgmin: {
       dist: {
         files: [{
@@ -379,13 +409,22 @@ module.exports = function (grunt) {
       ],
       dist: [
         'compass:dist',
+        'imagemin',
         'svgmin'
       ]
     },
+
+    // Test settings
+    karma: {
+      unit: {
+        configFile: 'test/karma.conf.js',
+        singleRun: true
+      }
+    }
   });
 
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+  grunt.registerTask('serve', 'Compile then start a connect/express web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -411,6 +450,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
+    'karma'
   ]);
 
   grunt.registerTask('build', [

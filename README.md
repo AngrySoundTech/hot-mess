@@ -1,10 +1,9 @@
 # hot-mess
 
-Angular and Firebase for a _really hot mess_
+This project is generated with [yo angularfire-express generator](https://github.com/matheushf/generator-angularfire-express)
+version 1.1.2.
 
 ## Build & development
-
-1. Run `npm install` and `bower install`
 
 Run `grunt` for building and `grunt serve` for preview.
 

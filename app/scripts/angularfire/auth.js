@@ -1,8 +1,14 @@
-(function() {
-  'use strict';
-  angular.module('firebase.auth', ['firebase', 'firebase.ref'])
+'use strict';
 
-    .factory('Auth', function($firebaseAuth, Ref) {
-      return $firebaseAuth(Ref);
-    });
-})();
+angular.module('firebase.Auth', [])
+
+  
+
+    .constant('SIMPLE_LOGIN_PROVIDERS', ['facebook'])
+
+  .constant('loginRedirectPath', '/login')
+
+
+  .factory('auth', ["$firebaseAuth", function ($firebaseAuth) {
+      return $firebaseAuth();
+    }]);

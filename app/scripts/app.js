@@ -16,6 +16,5 @@ angular.module('hotMessApp', [
     'ngSanitize',
     'ngTouch',
     'firebase',
-    'firebase.ref',
-    'firebase.auth'
+    'firebase.Auth'
   ]);

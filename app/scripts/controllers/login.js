@@ -7,16 +7,47 @@
  * Manages authentication to any active providers.
  */
 angular.module('hotMessApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location) {
-    $scope.oauthLogin = function(provider) {
-      $scope.err = null;
-      Auth.$authWithOAuthPopup(provider, {rememberMe: true}).then(redirect, showError);
-    };
+  .controller('LoginCtrl', ["$scope", "auth", "$location", function ($scope, auth, $location) {
 
-    $scope.anonymousLogin = function() {
-      $scope.err = null;
-      Auth.$authAnonymously({rememberMe: true}).then(redirect, showError);
-    };
+    $scope.loginBtn = true;
+    $scope.logoutBtn = true;
+
+    auth.$onAuthStateChanged(function (authData) {
+      if (authData) {
+        console.log(" logged: " + authData.uid);
+        $scope.logoutBtn = true;
+        $scope.loginBtn = false;
+        $location.path('/account');
+      }
+    });
+
+    
+
+      // SignIn with a Provider
+      $scope.oauthLogin = function (provider) {
+        auth.$signInWithPopup(provider)
+          .then(function (authData) {
+            console.log("logged");
+            redirect();
+          })
+          .catch(function (error) {
+            console.log("login error");
+            showError(error);
+          })
+      };
+
+      // Anonymous login method
+      $scope.anonymousLogin = function () {
+        auth.$signInAnonymously()
+          .then(function (authData) {
+            console.log("logged ", authData.uid);
+          })
+          .catch(function (error) {
+            console.log("login error ", error);
+          })
+      };
+
+    
 
     
 
@@ -29,4 +60,4 @@ angular.module('hotMessApp')
     }
 
 
-  });
+  }]);
