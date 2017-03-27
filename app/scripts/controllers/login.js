@@ -17,7 +17,7 @@ angular.module('hotMessApp')
         console.log(" logged: " + authData.uid);
         $scope.logoutBtn = true;
         $scope.loginBtn = false;
-        $location.path('/account');
+        redirect()
       }
     });
 
@@ -47,12 +47,8 @@ angular.module('hotMessApp')
           })
       };
 
-
-
-
-
     function redirect() {
-      $location.path('/account');
+      $location.path('/');
     }
 
     function showError(err) {
