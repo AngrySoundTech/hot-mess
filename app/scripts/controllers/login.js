@@ -21,11 +21,11 @@ angular.module('hotMessApp')
       }
     });
 
-    
+
 
       // SignIn with a Provider
       $scope.oauthLogin = function (provider) {
-        auth.$signInWithPopup(provider)
+        auth.$signInWithRedirect(provider)
           .then(function (authData) {
             console.log("logged");
             redirect();
@@ -47,9 +47,9 @@ angular.module('hotMessApp')
           })
       };
 
-    
 
-    
+
+
 
     function redirect() {
       $location.path('/account');
