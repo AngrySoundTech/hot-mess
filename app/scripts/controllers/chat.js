@@ -24,7 +24,7 @@ angular.module('hotMessApp')
     $scope.addMessage = function (newMessage) {
       if (newMessage) {
         // push messages to the end of the array
-        $scope.messages.$add({
+        $scope.messages.push({
           text: newMessage,
           user: currentAuth.displayName,
           userId: currentAuth.uid
