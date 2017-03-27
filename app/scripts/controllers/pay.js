@@ -20,6 +20,7 @@ angular.module('hotMessApp')
         if ($scope.amount > $rootScope.money) {
           console.log("You don't have enough") //TODO Tell the user they're dumb
         } else {
+          // TODO: This should be a function on the server so people can't abuse it.
           // Subtract money from current user
           currUserRef.update({
             money: $rootScope.money - $scope.amount
@@ -27,10 +28,21 @@ angular.module('hotMessApp')
           // Add money to new user
           let targetUserRef = firebase.database().ref('users/' + $scope.uid);
           targetUserRef.once('value').then(function (snapshot) {
+            let targetUserName = snapshot.val().displayName;
             let targetUserAmount = snapshot.val().money;
             targetUserRef.update({
               money: targetUserAmount + $scope.amount
-            })
+            });
+
+            // Add transaction to database
+            let transactionsRef = firebase.database().ref('transactions/');
+            transactionsRef.push({
+              fromUser: $scope.user.uid,
+              fromUserName: $scope.user.displayName,
+              toUser: $scope.uid, amount: $scope.amount,
+              toUserName: targetUserName,
+              time: firebase.database.ServerValue.TIMESTAMP
+            });
           });
         }
       }

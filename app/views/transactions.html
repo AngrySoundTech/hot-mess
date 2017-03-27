@@ -1,13 +1,13 @@
 <ul class="mdl-list">
 
 <!-- //TODO: replace ng-repeat with a list of transactions -->
-<div ng-repeat="i in [1,2,3]">
+<div ng-repeat="transaction in transactions">
   <li class="mdl-list__item mdl-list__item--three-line">
     <span class="mdl-list__item-primary-content">
-      <span>Person 1 paid Person 2</span>
-      <span class="mdl-list__item-text-body">Optional description</span>
+      <span>{{transaction.fromUserName}} paid {{transaction.toUserName}}</span>
+      <!--<span class="mdl-list__item-text-body">Optional description</span>-->
     </span>
-    <span class="mdl-list__item-secondary-content">$100</span>
+    <span class="mdl-list__item-secondary-content">{{transaction.amount | currency : $ : 0}}</span>
   </li>
   <hr>
 </div>
