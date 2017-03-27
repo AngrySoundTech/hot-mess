@@ -17,6 +17,7 @@ angular.module('hotMessApp')
     $scope.paySomeone = function () {
       if ($scope.uid && $scope.amount) {
 
+        // TODO: Check user isn't themselves
         if ($scope.amount > $rootScope.money) {
           console.log("You don't have enough") //TODO Tell the user they're dumb
         } else {
@@ -35,6 +36,7 @@ angular.module('hotMessApp')
             });
 
             // Add transaction to database
+            // TODO: Add description
             let transactionsRef = firebase.database().ref('transactions/');
             transactionsRef.push({
               fromUser: $scope.user.uid,
