@@ -15,7 +15,7 @@ angular.module('hotMessApp')
     auth.$onAuthStateChanged(function (authData) {
       if (authData) {
         console.log(" logged: " + authData.uid);
-        firebase.database().ref('users/' + authData.uid).set({
+        firebase.database().ref('users/' + authData.uid).update({
           uid: authData.uid,
           displayName: authData.displayName
         });
