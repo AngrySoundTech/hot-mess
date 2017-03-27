@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.purple-pink.min.css">
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
-<body ng-app="hotMessApp" ng-controller="MainCtrl">
+<body ng-app="hotMessApp">
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
   your browser</a> to improve your experience.</p>
@@ -46,8 +46,6 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/firebase/firebase.js"></script>
   <script src="bower_components/angularfire/dist/angularfire.js"></script>
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -72,12 +70,13 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/transactions.js"></script>
+        <script src="scripts/controllers/account.js"></script>
         <script src="scripts/controllers/chat.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/pay.js"></script>
+        <script src="scripts/controllers/transactions.js"></script>
         <script src="scripts/filters/reverse.js"></script>
         <script src="scripts/angularfire/auth.js"></script>
-        <script src="scripts/controllers/login.js"></script>
-        <script src="scripts/controllers/account.js"></script>
         <script src="scripts/directives/ngShowAuth.js"></script>
         <script src="scripts/directives/ngHideAuth.js"></script>
         <script src="scripts/routes.js"></script>

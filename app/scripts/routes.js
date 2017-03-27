@@ -73,11 +73,6 @@ angular.module('hotMessApp')
           }]
         }
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
@@ -103,7 +98,7 @@ angular.module('hotMessApp')
       })
       .when('/pay', {
         templateUrl: 'views/pay.html',
-        controller: 'Pay',
+        controller: 'PayCtrl',
         resolve: {
           "currrentAuth": ["auth", function (auth) {
             return auth.$waitForSignIn();
