@@ -1,1 +1,15 @@
 <h2>Pay</h2>
+
+<h2 ng-repeat="x in users">{{x.name}}</h2>
+
+<form ng-submit="paySomeone()">
+  <label>Name</label>
+  <select ng-model="uid">
+    <option ng-repeat="x in users" value="{{x.uid}}">{{x.displayName}}</option>
+  </select>
+
+  <label>Amount</label>
+  <input type="text" ng-model="amount">
+
+  <button type="submit">Submit</button>
+</form>
