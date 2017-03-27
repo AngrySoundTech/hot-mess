@@ -65,18 +65,13 @@ angular.module('hotMessApp')
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+        templateUrl: 'views/transactions.html',
+        controller: 'TransCtrl',
         resolve: {
           "currentAuth": ["auth", function (auth) {
             return auth.$waitForSignIn();
           }]
         }
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -97,6 +92,15 @@ angular.module('hotMessApp')
         controller: 'Chat',
         resolve: {
           "currentAuth": ["auth", function (auth) {
+            return auth.$waitForSignIn();
+          }]
+        }
+      })
+      .when('/pay', {
+        templateUrl: 'views/pay.html',
+        controller: 'PayCtrl',
+        resolve: {
+          "currrentAuth": ["auth", function (auth) {
             return auth.$waitForSignIn();
           }]
         }

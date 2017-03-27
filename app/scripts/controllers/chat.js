@@ -1,11 +1,5 @@
 'use strict';
-/**
- * @ngdoc function
- * @name hotMessApp.controller:ChatCtrl
- * @description
- * # ChatCtrl
- * A demo of using AngularFire to manage a synchronized list.
- */
+
 angular.module('hotMessApp')
   .controller('Chat', ["$scope", "currentAuth", "$firebaseArray", "$timeout", function ($scope, currentAuth, $firebaseArray, $timeout) {
     $scope.user = currentAuth;
