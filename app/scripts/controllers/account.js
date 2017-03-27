@@ -11,7 +11,7 @@ angular.module('hotMessApp')
     $scope,
     auth,
     currentAuth
-  
+
   ) {
 
   $scope.user = {
@@ -20,8 +20,6 @@ angular.module('hotMessApp')
     photo: currentAuth.photoURL,
     email: currentAuth.email
   };
-
-    
 
   $scope.updateProfile = function(name, imgUrl) {
     firebase.auth().currentUser.updateProfile({
