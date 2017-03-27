@@ -101,6 +101,15 @@ angular.module('hotMessApp')
           }]
         }
       })
+      .when('/pay', {
+        templateUrl: 'views/pay.html',
+        controller: 'Pay',
+        resolve: {
+          "currrentAuth": ["auth", function (auth) {
+            return auth.$waitForSignIn();
+          }]
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
