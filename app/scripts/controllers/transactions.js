@@ -1,10 +1,18 @@
 'use strict';
 
 angular.module('hotMessApp')
-  .controller('TransCtrl', ["$scope", "$location", "currentAuth", function ($scope, $location, currentAuth) {
+  .controller('TransCtrl', ["$scope","$rootScope", "$location", "currentAuth", function ($scope, $rootScope, $location, currentAuth) {
     $scope.user = currentAuth;
 
-    $scope.paySomeone = function (person, amount) {
+    var moneyRef = firebase.database().ref('users/' + currentAuth.uid + '/money');
+    moneyRef.on('value', function(money) {
+      $scope.$apply(function(){
+        $rootScope.money = money.val();
+      });
 
+    });
+
+    $rootScope.formatMoney = function () {
+      return "$" + $rootScope.money.toLocaleString('en-US');
     }
   }]);

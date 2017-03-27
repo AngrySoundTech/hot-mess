@@ -100,7 +100,7 @@ angular.module('hotMessApp')
         templateUrl: 'views/pay.html',
         controller: 'PayCtrl',
         resolve: {
-          "currrentAuth": ["auth", function (auth) {
+          "currentAuth": ["auth", function (auth) {
             return auth.$waitForSignIn();
           }]
         }

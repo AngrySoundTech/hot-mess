@@ -7,7 +7,7 @@
  * Manages authentication to any active providers.
  */
 angular.module('hotMessApp')
-  .controller('LoginCtrl', ["$scope", "auth", "$location", function ($scope, auth, $location) {
+  .controller('LoginCtrl', ["$scope", "auth", "$location", "$firebaseArray", function ($scope, auth, $location, $firebaseArray) {
 
     $scope.loginBtn = true;
     $scope.logoutBtn = true;
