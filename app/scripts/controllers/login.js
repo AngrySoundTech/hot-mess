@@ -15,6 +15,10 @@ angular.module('hotMessApp')
     auth.$onAuthStateChanged(function (authData) {
       if (authData) {
         console.log(" logged: " + authData.uid);
+        firebase.database().ref('users/' + authData.uid).set({
+          uid: authData.uid,
+          displayName: authData.displayName
+        });
         $scope.logoutBtn = true;
         $scope.loginBtn = false;
         redirect()

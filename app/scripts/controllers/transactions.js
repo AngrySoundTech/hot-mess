@@ -13,6 +13,10 @@ angular.module('hotMessApp')
     });
 
     $rootScope.formatMoney = function () {
-      return "$" + $rootScope.money.toLocaleString('en-US');
+      if ($rootScope.money) {
+        return "$" + $rootScope.money.toLocaleString('en-US');
+      } else {
+        return "$0"
+      }
     }
   }]);
