@@ -2,17 +2,12 @@
 <html class="no-js">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Hot Mess For A Good Cause</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
-  <!-- bower:css -->
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.purple-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 <body ng-app="hotMessApp" ng-controller="MainCtrl">
 <!--[if lt IE 7]>
@@ -21,63 +16,30 @@
 <![endif]-->
 
 <!-- Add your site or application content here -->
-<div class="header" ng-cloak="">
-  <div class="navbar navbar-default" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
 
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-
-        <a class="navbar-brand" href="#/">hotMess</a>
-      </div>
-
-      <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-          <ul class="nav navbar-nav">
-            <!-- //angularfire -->
-
-            <li class=""><a href="#!/chat">Chat</a></li>
-
-            <li class=""><a href="#!/account" ng-show-auth="">Account</a></li>
-            <li class=""><a href="#!/login" ng-hide-auth="">Login</a></li>
-            <li class=""><a href="" ng-show-auth="" ng-click="logout()">Logout</a></li>
-
-          </ul>
-        </div>
-      </div>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Hot Mess</span>
+      <div class="mdl-layout-spacer"></div>
+      <span class="mdl-layout-title">$0,000</span>
     </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Hot Menu</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Send Monies</a>
+      <a class="mdl-navigation__link" href="">Bet Monies</a>
+    </nav>
   </div>
-
-  <div class="container">
-
-    <div ng-view=""></div>
-
-  </div>
-
-  <div class="footer">
-    <div class="container">
-      <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team and Firebase</p>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <!-- Your content goes here -->
+      <div ng-view="">
     </div>
-  </div>
+  </main>
+</div>
 
-
-  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-  <script>
-    !function (A, n, g, u, l, a, r) {
-      A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
-          (A[l].q = A[l].q || []).push(arguments)
-        }, A[l].l = +new Date, a = n.createElement(g),
-        r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-    }(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-XXXXX-X');
-    ga('send', 'pageview');
-  </script>
 
   <!-- build:js(.) scripts/vendor.js -->
   <!-- bower:js -->
@@ -92,6 +54,7 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/material-design-lite/material.min.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
