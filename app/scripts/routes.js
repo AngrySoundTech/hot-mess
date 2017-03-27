@@ -65,8 +65,8 @@ angular.module('hotMessApp')
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+        templateUrl: 'views/transactions.html',
+        controller: 'TransCtrl',
         resolve: {
           "currentAuth": ["auth", function (auth) {
             return auth.$waitForSignIn();
