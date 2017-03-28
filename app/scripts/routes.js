@@ -105,6 +105,42 @@ angular.module('hotMessApp')
           }]
         }
       })
+      .when('/bets', {
+        templateUrl: 'views/bets/bets.html',
+        controller: 'BetsCtrl',
+        resolve: {
+          "currentAuth": ["auth", function (auth) {
+            return auth.$waitForSignIn();
+          }]
+        }
+      })
+      .when('/bets/view', {
+        templateUrl: 'views/bets/viewBet.html',
+        controller: 'BetsCtrl',
+        resolve: {
+          "currentAuth": ["auth", function (auth) {
+            return auth.$waitForSignIn();
+          }]
+        }
+      })
+      .when('/bets/place', {
+        templateUrl: 'views/bets/placeBet.html',
+        controller: 'BetsCtrl',
+        resolve: {
+          "currentAuth": ["auth", function (auth) {
+            return auth.$waitForSignIn();
+          }]
+        }
+      })
+      .when('/bets/create', {
+        templateUrl: 'views/bets/createBet.html',
+        controller: 'BetsCtrl',
+        resolve: {
+          "currentAuth": ["auth", function (auth) {
+            return auth.$waitForSignIn();
+          }]
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
