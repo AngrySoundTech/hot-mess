@@ -15,7 +15,7 @@ angular.module('hotMessApp')
     });
 
     $scope.paySomeone = function () {
-      if ($scope.selectedPerson && $scope.amount) {
+      if ($scope.selectedPerson && $scope.amount > 1) {
 
         // TODO: Check user isn't themselves
         if ($scope.amount > $rootScope.money) {
@@ -24,7 +24,7 @@ angular.module('hotMessApp')
           // TODO: This should be a function on the server so people can't abuse it.
           // Subtract money from current user
           currUserRef.update({
-            money: $rootScope.money - $scope.amount
+            money: $rootScope.money - Math.floor($scope.amount)
           });
           // Add money to new user
           let targetUserRef = firebase.database().ref('users/' + $scope.selectedPerson.uid);
@@ -32,7 +32,7 @@ angular.module('hotMessApp')
             let targetUserName = snapshot.val().displayName;
             let targetUserAmount = snapshot.val().money;
             targetUserRef.update({
-              money: targetUserAmount + $scope.amount
+              money: targetUserAmount + Math.floor($scope.amount)
             });
 
             // Add transaction to database
@@ -41,7 +41,8 @@ angular.module('hotMessApp')
             transactionsRef.push({
               fromUser: $scope.user.uid,
               fromUserName: $scope.user.displayName,
-              toUser: $scope.selectedPerson.uid, amount: $scope.amount,
+              toUser: $scope.selectedPerson.uid,
+              amount: Math.floor($scope.amount),
               toUserName: targetUserName,
               time: firebase.database.ServerValue.TIMESTAMP,
               description: $scope.description
