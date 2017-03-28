@@ -15,10 +15,10 @@ angular.module('hotMessApp')
     });
 
     $scope.paySomeone = function () {
-      if ($scope.selectedPerson && $scope.amount > 1) {
+      if ($scope.selectedPerson && $scope.amount > 1 && $scope.user.uid !== $scope.selectedPerson.uid) {
 
         // TODO: Check user isn't themselves
-        if ($scope.amount > $rootScope.money) {
+        if ($scope.amount > $rootScope.money ) {
           console.log("You don't have enough") //TODO Tell the user they're dumb
         } else {
           // TODO: This should be a function on the server so people can't abuse it.
@@ -48,14 +48,18 @@ angular.module('hotMessApp')
               description: $scope.description
             });
           });
+          $location.path('/')
         }
-        $location.path('/')
       }
     };
 
     $scope.searchUsers = (searchText) => {
       return $scope.users.filter((value) => {
-        return value.displayName.toLowerCase().startsWith(searchText.toLowerCase());
+        if (value.uid === $scope.user.uid) {
+          return false
+        } else {
+          return value.displayName.toLowerCase().startsWith(searchText.toLowerCase());
+        }
       });
     }
 
