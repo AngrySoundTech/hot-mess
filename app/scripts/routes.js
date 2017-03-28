@@ -114,7 +114,7 @@ angular.module('hotMessApp')
           }]
         }
       })
-      .when('/bets/view', {
+      .when('/bets/view/:id', {
         templateUrl: 'views/bets/viewBet.html',
         controller: 'BetsCtrl',
         resolve: {

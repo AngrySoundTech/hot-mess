@@ -1,12 +1,14 @@
 <ul class="mdl-list">
-  <div ng-repeat="bet in activeBets | reverse">
-    <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <span>{{bet.description}}</span>
-      <span class="mdl-list__item-text-body">Created by {{bet.creatorDisplayName}}</span>
-    </span>
-      <span class="mdl-list__item-secondary-content">{{transaction.amount | currency : $ : 0}}</span>
-    </li>
-    <hr>
-  </div>
+  <a ng-repeat="bet in activeBets | reverse" href="#!/bets/view/{{bet._key}}">
+    <div>
+      <li class="mdl-list__item mdl-list__item--three-line">
+      <span class="mdl-list__item-primary-content">
+        <span>{{bet.description}}</span>
+        <span class="mdl-list__item-text-body">Created by {{bet.creatorDisplayName}}</span>
+      </span>
+        <span class="mdl-list__item-secondary-content">{{transaction.amount | currency : $ : 0}}</span>
+      </li>
+      <hr>
+    </div>
+  </a>
 </ul>

@@ -1,9 +1,11 @@
 angular.module('hotMessApp')
-  .controller('BetsCtrl', ["$scope","$rootScope", "$timeout", "$location", "currentAuth", function ($scope, $rootScope, $timeout, $location, currentAuth) {
+  .controller('BetsCtrl', ["$scope", "$timeout", "$location", "currentAuth", "$routeParams", function ($scope, $timeout, $location, currentAuth, $routeParams) {
     $scope.user = currentAuth;
 
     let activeBetsRef = firebase.database().ref("bets/active");
     let inactiveBetsRef = firebase.database().ref("bets/inactive");
+
+    setCurrentBet($routeParams.id);
 
     activeBetsRef.on('value', (activeBets) => {
       $timeout(() => {
@@ -11,6 +13,11 @@ angular.module('hotMessApp')
       });
     });
 
+    /**
+     * Creates a bet with the given description / current user as the creator,
+     * and redirects to /bets
+     * @param description The description of the bet
+     */
     $scope.createBet = (description) => {
       activeBetsRef.push({
         description: description,
@@ -19,4 +26,25 @@ angular.module('hotMessApp')
       });
       $location.path('/bets');
     };
+
+    function setCurrentBet(id) {
+      if (!id) return;
+
+      // We assume the same id can't exist in both active and inactive.
+      activeBetsRef.child(id).once('value', (bet) => {
+        if (bet.val()) {
+          $timeout(() =>{
+            $scope.currentBet = bet.val()
+          })
+        }
+      });
+      inactiveBetsRef.child(id).once('value', (bet) => {
+        if (bet.val()) {
+          $timeout(() =>{
+            $scope.currentBet = bet.val()
+          })
+        }
+      })
+    }
+
   }]);
