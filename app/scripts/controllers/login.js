@@ -14,11 +14,22 @@ angular.module('hotMessApp')
 
     auth.$onAuthStateChanged(function (authData) {
       if (authData) {
-        console.log(" logged: " + authData.uid);
-        firebase.database().ref('users/' + authData.uid).update({
+        let userRef = firebase.database().ref("users/" +authData.uid);
+        firebase.database().ref("users/" + authData.uid).update({
           uid: authData.uid,
           displayName: authData.displayName
         });
+
+        // Set money to zero if they don't have any (temporary workaround)
+        let moneyRef = firebase.database().ref("users/" + authData.uid + "/money");
+        moneyRef.once('value').then(function (money) {
+          if (!money.val()) {
+            userRef.update({
+              money: 0
+            })
+          }
+        });
+
         $scope.logoutBtn = true;
         $scope.loginBtn = false;
         redirect()
@@ -27,29 +38,29 @@ angular.module('hotMessApp')
 
 
 
-      // SignIn with a Provider
-      $scope.oauthLogin = function (provider) {
-        auth.$signInWithRedirect(provider)
-          .then(function (authData) {
-            console.log("logged");
-            redirect();
-          })
-          .catch(function (error) {
-            console.log("login error");
-            showError(error);
-          })
-      };
+    // SignIn with a Provider
+    $scope.oauthLogin = function (provider) {
+      auth.$signInWithRedirect(provider)
+        .then(function (authData) {
+          console.log("logged");
+          redirect();
+        })
+        .catch(function (error) {
+          console.log("login error");
+          showError(error);
+        })
+    };
 
-      // Anonymous login method
-      $scope.anonymousLogin = function () {
-        auth.$signInAnonymously()
-          .then(function (authData) {
-            console.log("logged ", authData.uid);
-          })
-          .catch(function (error) {
-            console.log("login error ", error);
-          })
-      };
+    // Anonymous login method
+    $scope.anonymousLogin = function () {
+      auth.$signInAnonymously()
+        .then(function (authData) {
+          console.log("logged ", authData.uid);
+        })
+        .catch(function (error) {
+          console.log("login error ", error);
+        })
+    };
 
     function redirect() {
       $location.path('/');
