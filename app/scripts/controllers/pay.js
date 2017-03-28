@@ -10,12 +10,12 @@ angular.module('hotMessApp')
 
     usersRef.once('value').then(function (snapshot) {
       $scope.$apply(function(){
-        $scope.users = snapshot.val();
+        $scope.users = objectToList(snapshot.val());
       });
     });
 
     $scope.paySomeone = function () {
-      if ($scope.uid && $scope.amount) {
+      if ($scope.selectedPerson && $scope.amount) {
 
         // TODO: Check user isn't themselves
         if ($scope.amount > $rootScope.money) {
@@ -27,7 +27,7 @@ angular.module('hotMessApp')
             money: $rootScope.money - $scope.amount
           });
           // Add money to new user
-          let targetUserRef = firebase.database().ref('users/' + $scope.uid);
+          let targetUserRef = firebase.database().ref('users/' + $scope.selectedPerson.uid);
           targetUserRef.once('value').then(function (snapshot) {
             let targetUserName = snapshot.val().displayName;
             let targetUserAmount = snapshot.val().money;
@@ -41,14 +41,21 @@ angular.module('hotMessApp')
             transactionsRef.push({
               fromUser: $scope.user.uid,
               fromUserName: $scope.user.displayName,
-              toUser: $scope.uid, amount: $scope.amount,
+              toUser: $scope.selectedPerson.uid, amount: $scope.amount,
               toUserName: targetUserName,
               time: firebase.database.ServerValue.TIMESTAMP,
               description: $scope.description
             });
           });
         }
+        $location.path('/')
       }
+    };
+
+    $scope.searchUsers = (searchText) => {
+      return $scope.users.filter((value) => {
+        return value.displayName.toLowerCase().startsWith(searchText.toLowerCase());
+      });
     }
 
   }]);
