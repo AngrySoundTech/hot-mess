@@ -16,7 +16,8 @@ angular.module('hotMessApp', [
     'ngSanitize',
     'ngTouch',
     'firebase',
-    'firebase.Auth'
+    'firebase.Auth',
+    'ngMaterial'
   ])
 
   .run(['$rootScope', '$location', 'auth', function ($rootScope, $location, auth) {

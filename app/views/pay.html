@@ -1,8 +1,28 @@
-<h2>Pay</h2>
+<h2>Send Relay Monies</h2>
 
 <h2 ng-repeat="x in users">{{x.name}}</h2>
 
 <form ng-submit="paySomeone()">
+
+  <md-autocomplete
+      md-no-cache="true"
+      md-selected-item=""
+      md-search-text-change=""
+      md-search-text=""
+      md-selected-item-change=""
+      md-items="x in users"
+      md-item-text=""
+      md-min-length="0"
+      placeholder="Search for people to send to">
+    <md-item-template>
+      <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+    </md-item-template>
+    <md-not-found>
+      "{{ctrl.searchText}}" was not found.
+    </md-not-found>
+  </md-autocomplete>
+
+<!--
   <label>Name</label>
   <select ng-model="uid">
     <option ng-repeat="x in users" value="{{x.uid}}">{{x.displayName}}</option>
@@ -15,4 +35,5 @@
   <input type="text" ng-model="description">
 
   <button type="submit">Submit</button>
+  -->
 </form>
