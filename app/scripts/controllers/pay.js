@@ -45,7 +45,7 @@ angular.module('hotMessApp')
               amount: Math.floor($scope.amount),
               toUserName: targetUserName,
               time: firebase.database.ServerValue.TIMESTAMP,
-              description: $scope.description
+              description: $scope.description? $scope.description : ""
             });
           });
           $location.path('/')
