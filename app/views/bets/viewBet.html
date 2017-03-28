@@ -1,4 +1,8 @@
 <h1>View Bet</h1>
 
-{{currentBet.description}}
-{{currentBet.creatorDisplayName}}
+<ANY ng-if="user.id === currentBet.createdBy">
+  <h1>Select Winner:</h1>
+  <button ng-click="selectWinner('option1')">{{currentBet.option1}}</button>
+  <button ng-click="selectWinner('option2')">{{currentBet.option2}}</button>
+
+</ANY>

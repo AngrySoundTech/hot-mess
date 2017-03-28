@@ -32,9 +32,22 @@ angular.module('hotMessApp', [
 
 // Helper functions
 function objectToList(object) {
+  if (!object) {
+    return;
+  }
+
   return Object.keys(object).map((key) => {
     let obj = object[key];
     obj._key = key;
     return obj;
+  });
+}
+
+function moveRecord(oldRef, newRef) {
+  oldRef.once('value', function(snap)  {
+    newRef.set( snap.val(), function(error) {
+      if( !error ) {  oldRef.remove(); }
+      else if( typeof(console) !== 'undefined' && console.error ) {  console.error(error); }
+    });
   });
 }
