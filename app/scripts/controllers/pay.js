@@ -43,7 +43,8 @@ angular.module('hotMessApp')
               fromUserName: $scope.user.displayName,
               toUser: $scope.uid, amount: $scope.amount,
               toUserName: targetUserName,
-              time: firebase.database.ServerValue.TIMESTAMP
+              time: firebase.database.ServerValue.TIMESTAMP,
+              description: $scope.description
             });
           });
         }

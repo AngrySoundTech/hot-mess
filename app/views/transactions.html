@@ -5,7 +5,7 @@
   <li class="mdl-list__item mdl-list__item--three-line">
     <span class="mdl-list__item-primary-content">
       <span>{{transaction.fromUserName}} paid {{transaction.toUserName}}</span>
-      <!--<span class="mdl-list__item-text-body">Optional description</span>-->
+      <span class="mdl-list__item-text-body">{{transaction.description}}</span>
     </span>
     <span class="mdl-list__item-secondary-content">{{transaction.amount | currency : $ : 0}}</span>
   </li>
