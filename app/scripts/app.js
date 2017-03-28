@@ -29,3 +29,11 @@ angular.module('hotMessApp', [
     })
   }]);
 
+// Helper functions
+function objectToList(object) {
+  return Object.keys(object).map((key) => {
+    let obj = object[key];
+    obj._key = key;
+    return obj;
+  });
+}

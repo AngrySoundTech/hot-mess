@@ -7,12 +7,7 @@ angular.module('hotMessApp')
     let transactionsRef = firebase.database().ref('transactions/').limitToLast(20);
     transactionsRef.on('value', function (transactions) {
       $timeout(function () {
-        let data = transactions.val();
-        $scope.transactions = Object.keys(data).map((key) => {
-          let obj = data[key];
-          obj._key = key;
-          return obj;
-        });
+        $scope.transactions = objectToList(transactions.val());
       });
     });
 

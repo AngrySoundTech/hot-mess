@@ -7,12 +7,7 @@ angular.module('hotMessApp')
 
     activeBetsRef.on('value', (activeBets) => {
       $timeout(() => {
-        let data = activeBets.val();
-        $scope.activeBets = Object.keys(data).map((key) => {
-          let obj = data[key];
-          obj._key = key;
-          return obj;
-        });
+        $scope.activeBets = objectToList(activeBets.val());
       });
     });
 
