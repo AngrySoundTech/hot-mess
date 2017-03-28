@@ -1,2 +1,12 @@
-<h1>Bets</h1>
-
+<ul class="mdl-list">
+  <div ng-repeat="bet in activeBets | reverse">
+    <li class="mdl-list__item mdl-list__item--three-line">
+    <span class="mdl-list__item-primary-content">
+      <span>{{bet.description}}</span>
+      <span class="mdl-list__item-text-body">Created by {{bet.creatorDisplayName}}</span>
+    </span>
+      <span class="mdl-list__item-secondary-content">{{transaction.amount | currency : $ : 0}}</span>
+    </li>
+    <hr>
+  </div>
+</ul>
