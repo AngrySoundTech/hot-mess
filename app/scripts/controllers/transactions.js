@@ -4,10 +4,15 @@ angular.module('hotMessApp')
   .controller('TransCtrl', ["$scope","$rootScope", "$timeout", "$location", "currentAuth", function ($scope, $rootScope, $timeout, $location, currentAuth) {
     $scope.user = currentAuth;
 
-    let transactionsRef = firebase.database().ref('transactions/');
+    let transactionsRef = firebase.database().ref('transactions/').limitToFirst(20);
     transactionsRef.on('value', function (transactions) {
       $timeout(function () {
-        $scope.transactions = transactions.val();
+        let data = transactions.val();
+        $scope.transactions = Object.keys(data).map((key) => {
+          let obj = data[key];
+          obj._key = key;
+          return obj;
+        });
       });
     });
 
