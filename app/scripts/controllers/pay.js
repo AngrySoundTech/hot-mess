@@ -15,7 +15,7 @@ angular.module('hotMessApp')
     });
 
     $scope.paySomeone = function () {
-      if ($scope.selectedPerson && $scope.amount > 1 && $scope.user.uid !== $scope.selectedPerson.uid) {
+      if ($scope.selectedPerson && $scope.amount >= 1 && $scope.user.uid !== $scope.selectedPerson.uid) {
 
         // TODO: Check user isn't themselves
         if ($scope.amount > $rootScope.money ) {
