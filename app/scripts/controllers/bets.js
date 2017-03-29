@@ -33,9 +33,20 @@ angular.module('hotMessApp')
     };
 
     $scope.betOn = (betAmount, option) => {
-      console.log($scope.currentBet);
-      console.log(betAmount);
-      console.log(option);
+      if (betAmount >= 1 && (option === 'option1' || option === 'option2')) {
+        firebase.database().ref('bets/active/' + $routeParams.id).once('value').then((bet) => {
+          if (!(bet.child('betsOn-option1/'+$scope.user.uid).exists() || bet.child('betsOn-option2/+'+$scope.user.uid).exists())) {
+            // Assume we're betting on an active bet because that makes sense
+            firebase.database().ref('bets/active/' + $routeParams.id + "/betsOn-" + option + "/" + $scope.user.uid ).set({
+              amount: betAmount,
+              displayName: $scope.user.displayName
+            });
+            firebase.database().ref('bets/active/' + $routeParams.id + "/pool").transaction((pool) => {
+              return pool + betAmount;
+            });
+          }
+        });
+      }
     };
 
     /**
@@ -53,6 +64,8 @@ angular.module('hotMessApp')
       }
 
       moveRecord(activeBetRef, inactiveBetsRef)
+
+      // TODO: Payout
     };
 
     function setCurrentBet(id) {
