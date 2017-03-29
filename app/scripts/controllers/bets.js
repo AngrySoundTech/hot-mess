@@ -32,11 +32,18 @@ angular.module('hotMessApp')
       $location.path('/bets');
     };
 
+    $scope.betOn = (betAmount, option) => {
+      console.log($scope.currentBet);
+      console.log(betAmount);
+      console.log(option);
+    };
+
     /**
      * Selects the winner of a bet
      * @param winner the winning option of the bet
      */
     $scope.selectWinner = (winner) => {
+      // Assume the bet is active if we're betting on it
       let activeBetRef = firebase.database().ref('bets/active/'+$routeParams.id);
 
       if (winner === 'option1' || winner === 'option2') {

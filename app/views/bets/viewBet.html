@@ -1,8 +1,25 @@
 <h1>View Bet</h1>
 
-<ANY ng-if="user.id === currentBet.createdBy">
+{{currentBet.description}}
+
+Created by {{currentBet.creatorDisplayName}}
+
+<ANY ng-if="user.uid === currentBet.creator">
   <h1>Select Winner:</h1>
   <button ng-click="selectWinner('option1')">{{currentBet.option1}}</button>
   <button ng-click="selectWinner('option2')">{{currentBet.option2}}</button>
 
+</ANY>
+<ANY ng-if="user.uid !== currentBet.creator">
+  <form ng-submit="betOn(betAmount, option)">
+    <label>Amount</label>
+    <input type="number" ng-model="betAmount"><br>
+
+    <label>{{currentBet.option1}}</label>
+    <input type="radio" name="option" value="{{currentBet.option1}}" ng-model="option"><br>
+    <label>{{currentBet.option2}}</label>
+    <input type="radio" name="option" value="{{currentBet.option2}}" ng-model="option"><br>
+
+    <input type="submit">
+  </form>
 </ANY>
