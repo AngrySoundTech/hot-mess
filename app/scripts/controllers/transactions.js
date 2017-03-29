@@ -15,6 +15,11 @@ angular.module('hotMessApp')
     moneyRef.on('value', function(money) {
         $timeout(function() {
           $rootScope.money = money.val();
+          $rootScope.moneyChanged = true;
+          setTimeout(() => {
+            $rootScope.moneyChanged = false;
+            console.log("Ayy")
+          }, 1000)
         });
     });
   }]);
