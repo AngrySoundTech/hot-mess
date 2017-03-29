@@ -1,13 +1,21 @@
-<h1>Create Bet</h1>
-
+<h1>Create New Bet</h1>
+<p>This is for creating new outcomes to place bets on. To place bets on existing options //TODO: figure out where they need to go</p>
 <form ng-submit="createBet(description, option1, option2)">
-  <label>Description</label>
-  <input type="text" ng-model="description"><br>
 
-  <label>Outcome 1</label>
-  <input type="text" ng-model="option1"><br>
-  <label>Outcome 2</label>
-  <input type="text" ng-model="option2"><br>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Description</label>
+    <input type="text" ng-model="description">
+  </md-input-container>
 
-  <input type="submit">
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Outcome 1</label>
+    <input type="text" ng-model="option1">
+  </md-input-container>
+
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Outcome 2</label>
+    <input type="text" ng-model="option2">
+  </md-input-container>
+
+  <md-button class="md-raised md-primary" type="submit">Create!</md-button>
 </form>

@@ -17,7 +17,7 @@
     <md-list-item class="md-2-line">
       <!--<img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />-->
       <div class="md-list-item-text" layout="column">
-        <h3>{{ transaction.fromUserName }} paid {{ transaction.toUserName }} {{ transaction.amount | currency : $ : 0 }}</h3>
+        <h3 style="white-space: normal;">{{ transaction.fromUserName }} paid {{ transaction.toUserName }} {{ transaction.amount | currency : $ : 0 }}</h3>
         <p>{{ transaction.description }}</p>
       </div>
     </md-list-item>
