@@ -2,7 +2,7 @@
 
 <form ng-submit="paySomeone()">
 
-  <md-autocomplete
+  <md-autocomplete style="padding-bottom: 16px"
       md-no-cache="true"
       md-selected-item="selectedPerson"
       md-search-text-change=""
@@ -20,12 +20,16 @@
     </md-not-found>
   </md-autocomplete>
 
-  <label>Amount</label>
-  <input type="number" ng-model="amount" min="1">
+  <md-input-container class="md-block" flex-gt-sm="">
+    <label>Amount</label>
+    <input id="amount" type="number" min="1" max="{{money}}" ng-model="amount">
+  </md-input-container>
 
-  <label>Description</label>
-  <input type="text" ng-model="description">
+  <md-input-container class="md-block">
+    <label>Description</label>
+    <textarea ng-model="description" rows="2" md-select-on-focus=""></textarea>
+  </md-input-container>
 
-  <button type="submit">Submit</button>
+  <md-button class="md-raised md-primary" type="submit">Send!</md-button>
 
 </form>
