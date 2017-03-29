@@ -3,9 +3,9 @@
 
 
 <div ng-if="user.uid === currentBet.creator">
-  <h1>Select Winner:</h1>
-  <button ng-click="selectWinner('option1')">{{currentBet.option1}}</button>
-  <button ng-click="selectWinner('option2')">{{currentBet.option2}}</button>
+  <h3>Select Winner:</h3>
+  <md-button class="md-raised" ng-click="selectWinner('option1')">{{currentBet.option1}}</md-button>
+  <md-button class="md-raised" ng-click="selectWinner('option2')">{{currentBet.option2}}</md-button>
 
 </div>
 <form ng-submit="betOn(betAmount, option)">
