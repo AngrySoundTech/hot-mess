@@ -15,16 +15,16 @@ angular.module('hotMessApp')
     });
 
     $scope.paySomeone = function () {
-      if ($scope.selectedPerson && $scope.amount) {
+      if ($scope.selectedPerson && $scope.amount > 1 && $scope.user.uid !== $scope.selectedPerson.uid) {
 
         // TODO: Check user isn't themselves
-        if ($scope.amount > $rootScope.money) {
+        if ($scope.amount > $rootScope.money ) {
           console.log("You don't have enough") //TODO Tell the user they're dumb
         } else {
           // TODO: This should be a function on the server so people can't abuse it.
           // Subtract money from current user
           currUserRef.update({
-            money: $rootScope.money - $scope.amount
+            money: $rootScope.money - Math.floor($scope.amount)
           });
           // Add money to new user
           let targetUserRef = firebase.database().ref('users/' + $scope.selectedPerson.uid);
@@ -32,7 +32,7 @@ angular.module('hotMessApp')
             let targetUserName = snapshot.val().displayName;
             let targetUserAmount = snapshot.val().money;
             targetUserRef.update({
-              money: targetUserAmount + $scope.amount
+              money: targetUserAmount + Math.floor($scope.amount)
             });
 
             // Add transaction to database
@@ -41,20 +41,25 @@ angular.module('hotMessApp')
             transactionsRef.push({
               fromUser: $scope.user.uid,
               fromUserName: $scope.user.displayName,
-              toUser: $scope.selectedPerson.uid, amount: $scope.amount,
+              toUser: $scope.selectedPerson.uid,
+              amount: Math.floor($scope.amount),
               toUserName: targetUserName,
               time: firebase.database.ServerValue.TIMESTAMP,
-              description: $scope.description
+              description: $scope.description? $scope.description : ""
             });
           });
+          $location.path('/')
         }
-        $location.path('/')
       }
     };
 
     $scope.searchUsers = (searchText) => {
       return $scope.users.filter((value) => {
-        return value.displayName.toLowerCase().startsWith(searchText.toLowerCase());
+        if (value.uid === $scope.user.uid) {
+          return false
+        } else {
+          return value.displayName.toLowerCase().startsWith(searchText.toLowerCase());
+        }
       });
     }
 
