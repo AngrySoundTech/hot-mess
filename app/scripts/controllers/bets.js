@@ -1,6 +1,6 @@
 'use strict';
 angular.module('hotMessApp')
-  .controller('BetsCtrl', ['$scope', '$timeout', '$location', 'currentAuth', '$routeParams', function ($scope, $timeout, $location, currentAuth, $routeParams) {
+  .controller('BetsCtrl', ['$scope', '$rootScope', '$timeout', '$location', 'currentAuth', '$routeParams', function ($scope, $rootScope, $timeout, $location, currentAuth, $routeParams) {
     $scope.user = currentAuth;
 
     let activeBetsRef = firebase.database().ref('bets/active');
@@ -43,6 +43,9 @@ angular.module('hotMessApp')
             });
             firebase.database().ref('bets/active/' + $routeParams.id + "/pool").transaction((pool) => {
               return pool + betAmount;
+            });
+            firebase.database().ref('users/' + $scope.user.uid).update({
+              money: $rootScope.money - Math.floor(betAmount)
             });
           }
         });
