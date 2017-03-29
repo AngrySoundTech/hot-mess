@@ -17,8 +17,9 @@ angular.module('hotMessApp')
           $rootScope.money = money.val();
           $rootScope.moneyChanged = true;
           setTimeout(() => {
-            $rootScope.moneyChanged = false;
-            console.log("Ayy")
+            $timeout(() => {
+              $rootScope.moneyChanged = false;
+            });
           }, 1000)
         });
     });
