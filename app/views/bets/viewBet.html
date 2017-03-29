@@ -1,25 +1,23 @@
-<h1>View Bet</h1>
+<h1>{{currentBet.description}}</h1>
+<h4>Created by {{currentBet.creatorDisplayName}}</h4>
 
-{{currentBet.description}}
 
-Created by {{currentBet.creatorDisplayName}}
-
-<ANY ng-if="user.uid === currentBet.creator">
+<div ng-if="user.uid === currentBet.creator">
   <h1>Select Winner:</h1>
   <button ng-click="selectWinner('option1')">{{currentBet.option1}}</button>
   <button ng-click="selectWinner('option2')">{{currentBet.option2}}</button>
 
-</ANY>
-<ANY ng-if="user.uid !== currentBet.creator">
-  <form ng-submit="betOn(betAmount, option)">
-    <label>Amount</label>
-    <input type="number" ng-model="betAmount"><br>
+</div>
+<form ng-submit="betOn(betAmount, option)">
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Bet Amount</label>
+    <input type="number" min="1" max="{{money}}" ng-model="betAmount">
+  </md-input-container>
 
-    <label>{{currentBet.option1}}</label>
-    <input type="radio" name="option" value="{{currentBet.option1}}" ng-model="option"><br>
-    <label>{{currentBet.option2}}</label>
-    <input type="radio" name="option" value="{{currentBet.option2}}" ng-model="option"><br>
+  <md-radio-group ng-model="option">
+    <md-radio-button value="{{currentBet.option1}}">{{currentBet.option1}}</md-radio-button>
+    <md-radio-button value="{{currentBet.option2}}">{{currentBet.option2}}</md-radio-button>
+  </md-radio-group>
 
-    <input type="submit">
-  </form>
-</ANY>
+  <md-button class="md-raised md-primary" type="submit">Place Bet!</md-button>
+</form>
