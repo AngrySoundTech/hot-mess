@@ -1,23 +1,37 @@
-<h1>{{currentBet.description}}</h1>
-<h4>Created by {{currentBet.creatorDisplayName}}</h4>
+<h2>{{currentBet.description}}</h2>
+<h5>Created by {{currentBet.creatorDisplayName}}</h5>
 
+<h4>Current Pool: {{currentBet.pool | currency : $ : 0}}</h4>
+
+<div ng-if="!hasPlacedBet">
+  <form ng-submit="betOn(betAmount, option)">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Bet Amount</label>
+      <input type="number" min="1" max="{{money}}" ng-model="betAmount">
+    </md-input-container>
+
+    <md-radio-group ng-model="option">
+      <md-radio-button value="option1">{{currentBet.option1}}</md-radio-button>
+      <md-radio-button value="option2">{{currentBet.option2}}</md-radio-button>
+    </md-radio-group>
+
+    <md-button class="md-raised md-primary" type="submit">Place Bet!</md-button>
+  </form>
+</div>
+
+<div>
+  <div style="font-size: larger">Current bets on {{currentBet.option1}}:</div>
+  <p ng-repeat="bet in currentBet['betsOn-option1']">{{bet.displayName}}: ${{bet.amount}}</p>
+</div>
+<div>
+  <div style="font-size: larger">Current bets on {{currentBet.option2}}:</div>
+  <p ng-repeat="bet in currentBet['betsOn-option2']">{{bet.displayName}}: ${{bet.amount}}</p>
+</div>
 
 <div ng-if="user.uid === currentBet.creator">
+  <hr>
   <h3>Select Winner:</h3>
   <md-button class="md-raised" ng-click="selectWinner('option1')">{{currentBet.option1}}</md-button>
   <md-button class="md-raised" ng-click="selectWinner('option2')">{{currentBet.option2}}</md-button>
 
 </div>
-<form ng-submit="betOn(betAmount, option)">
-  <md-input-container class="md-block" flex-gt-sm>
-    <label>Bet Amount</label>
-    <input type="number" min="1" max="{{money}}" ng-model="betAmount">
-  </md-input-container>
-
-  <md-radio-group ng-model="option">
-    <md-radio-button value="option1">{{currentBet.option1}}</md-radio-button>
-    <md-radio-button value="option2">{{currentBet.option2}}</md-radio-button>
-  </md-radio-group>
-
-  <md-button class="md-raised md-primary" type="submit">Place Bet!</md-button>
-</form>
