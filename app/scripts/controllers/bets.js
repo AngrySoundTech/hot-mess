@@ -69,6 +69,7 @@ angular.module('hotMessApp')
         });
       }
 
+      // HeRE
       let optpot = 0;
       firebase.database().ref('bets/active/' + $routeParams.id + '/betsOn-' + winner).once('value', (bets) => {
         bets.forEach((bet) => {
@@ -81,7 +82,6 @@ angular.module('hotMessApp')
           bet = bet.val();
           let percentOfPool = (100 * bet.amount) / optpot;
           let winnings = (percentOfPool / 100) * $scope.currentBet.pool;
-          console.log(percentOfPool + " / " + 100 + " * " + 10000 + " = " + winnings);
           paidOut += winnings;
           let targetUserRef = firebase.database().ref('users/' + bet.uid);
           targetUserRef.once('value').then(function (snapshot) {
@@ -93,6 +93,7 @@ angular.module('hotMessApp')
         });
       });
 
+      // HERE
       moveRecord(activeBetRef, inactiveBetsRef);
     };
 
