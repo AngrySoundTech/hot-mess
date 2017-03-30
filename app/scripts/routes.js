@@ -141,6 +141,15 @@ angular.module('hotMessApp')
           }]
         }
       })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl',
+        resolve: {
+          "currentAuth": ["auth", function (auth) {
+            return auth.$waitForSignIn();
+          }]
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
