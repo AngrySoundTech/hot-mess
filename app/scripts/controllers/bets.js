@@ -24,14 +24,14 @@ angular.module('hotMessApp')
      * @param option2 The second option
      */
     $scope.createBet = (description, option1, option2) => {
-      activeBetsRef.push({
+      const key = activeBetsRef.push({
         description: description,
         option1: option1,
         option2: option2,
         creator: $scope.user.uid,
         creatorDisplayName: $scope.user.displayName,
-      });
-      $location.path('/bets');
+      }).key;
+      $location.path('/bets/view/' + key);
     };
 
     $scope.betOn = (betAmount, option) => {
@@ -93,6 +93,7 @@ angular.module('hotMessApp')
       });
 
       moveRecord(activeBetRef, inactiveBetsRef);
+      $location.path('/bets')
     };
 
     function setCurrentBet(id) {
