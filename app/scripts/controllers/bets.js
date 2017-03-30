@@ -105,6 +105,7 @@ angular.module('hotMessApp')
         if (bet.val()) {
           $timeout(() =>{
             $scope.currentBet = bet.val();
+            $scope.hasPlacedBet = bet.child('betsOn-option1/' + $scope.user.uid).exists() || bet.child('betsOn-option2/'+$scope.user.uid).exists();
           });
         }
       });
@@ -112,6 +113,7 @@ angular.module('hotMessApp')
         if (bet.val()) {
           $timeout(() => {
             $scope.currentBet = bet.val();
+            $scope.hasPlacedBet = bet.child('betsOn-option1/' + $scope.user.uid).exists() || bet.child('betsOn-option2/'+$scope.user.uid).exists();
           });
         }
       });
