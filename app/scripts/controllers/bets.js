@@ -69,7 +69,6 @@ angular.module('hotMessApp')
         });
       }
 
-      // HeRE
       let optpot = 0;
       firebase.database().ref('bets/active/' + $routeParams.id + '/betsOn-' + winner).once('value', (bets) => {
         bets.forEach((bet) => {
@@ -93,7 +92,6 @@ angular.module('hotMessApp')
         });
       });
 
-      // HERE
       moveRecord(activeBetRef, inactiveBetsRef);
     };
 
