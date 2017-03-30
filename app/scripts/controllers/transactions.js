@@ -11,16 +11,20 @@ angular.module('hotMessApp')
       });
     });
 
+    let loaded = false;
     let moneyRef = firebase.database().ref('users/' + currentAuth.uid + '/money');
     moneyRef.on('value', function(money) {
         $timeout(function() {
           $rootScope.money = money.val();
-          $rootScope.moneyChanged = true;
-          setTimeout(() => {
-            $timeout(() => {
-              $rootScope.moneyChanged = false;
-            });
-          }, 1000)
+          if (loaded) {
+            $rootScope.moneyChanged = true;
+            setTimeout(() => {
+              $timeout(() => {
+                $rootScope.moneyChanged = false;
+              });
+            }, 1000);
+          }
+          loaded = true;
         });
     });
   }]);
