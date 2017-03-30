@@ -6,6 +6,8 @@ angular.module('hotMessApp')
     let activeBetsRef = firebase.database().ref('bets/active');
     let inactiveBetsRef = firebase.database().ref('bets/inactive');
 
+    let currUserRef = firebase.database().ref('users/' + $scope.user.uid);
+
     setCurrentBet($routeParams.id);
 
     activeBetsRef.on('value', (activeBets) => {
@@ -39,7 +41,8 @@ angular.module('hotMessApp')
             // Assume we're betting on an active bet because that makes sense
             firebase.database().ref('bets/active/' + $routeParams.id + "/betsOn-" + option + "/" + $scope.user.uid ).set({
               amount: betAmount,
-              displayName: $scope.user.displayName
+              displayName: $scope.user.displayName,
+              uid: $scope.user.uid
             });
             firebase.database().ref('bets/active/' + $routeParams.id + "/pool").transaction((pool) => {
               return pool + betAmount;
@@ -66,9 +69,31 @@ angular.module('hotMessApp')
         });
       }
 
-      moveRecord(activeBetRef, inactiveBetsRef)
+      let optpot = 0;
+      firebase.database().ref('bets/active/' + $routeParams.id + '/betsOn-' + winner).once('value', (bets) => {
+        bets.forEach((bet) => {
+          bet = bet.val();
+          optpot += bet.amount;
+        });
 
-      // TODO: Payout
+        let paidOut = 0;
+        bets.forEach((bet) => {
+          bet = bet.val();
+          let percentOfPool = (100 * bet.amount) / optpot;
+          let winnings = (percentOfPool / 100) * optpot;
+          console.log(percentOfPool + " / " + 100 + " * " + 10000 + " = " + winnings);
+          paidOut += winnings;
+          let targetUserRef = firebase.database().ref('users/' + bet.uid);
+          targetUserRef.once('value').then(function (snapshot) {
+            let targetUserAmount = snapshot.val().money;
+            targetUserRef.update({
+              money: targetUserAmount + Math.floor(winnings)
+            });
+          });
+        });
+      });
+
+      moveRecord(activeBetRef, inactiveBetsRef);
     };
 
     function setCurrentBet(id) {
