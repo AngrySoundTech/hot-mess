@@ -80,7 +80,7 @@ angular.module('hotMessApp')
         bets.forEach((bet) => {
           bet = bet.val();
           let percentOfPool = (100 * bet.amount) / optpot;
-          let winnings = (percentOfPool / 100) * optpot;
+          let winnings = (percentOfPool / 100) * $scope.currentBet.pool;
           console.log(percentOfPool + " / " + 100 + " * " + 10000 + " = " + winnings);
           paidOut += winnings;
           let targetUserRef = firebase.database().ref('users/' + bet.uid);
