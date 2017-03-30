@@ -1,1 +1,30 @@
-<h1>Admin</h1>
+<h2>Admin</h2>
+
+<form ng-submit="paySomeone()">
+
+  <md-autocomplete style="padding-bottom: 16px"
+                   md-no-cache="true"
+                   md-selected-item="selectedPerson"
+                   md-search-text-change=""
+                   md-search-text="searchText"
+                   md-selected-item-change=""
+                   md-items="x in searchUsers(searchText)"
+                   md-item-text="x.displayName"
+                   md-min-length="0"
+                   placeholder="Search for people to add money to">
+    <md-item-template>
+      <span md-highlight-text="searchText" md-highlight-flags="^i">{{x.displayName}}</span>
+    </md-item-template>
+    <md-not-found>
+      "{{searchText}}" was not found.
+    </md-not-found>
+  </md-autocomplete>
+
+  <md-input-container class="md-block" flex-gt-sm="">
+    <label>Amount</label>
+    <input id="amount" type="number" min="1" ng-model="amount">
+  </md-input-container>
+
+  <md-button class="md-raised md-primary" type="submit">Send!</md-button>
+
+</form>
