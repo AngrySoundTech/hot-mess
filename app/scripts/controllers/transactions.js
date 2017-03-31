@@ -15,6 +15,14 @@ angular.module('hotMessApp')
             return transaction.fromUser === $scope.user.uid || transaction.toUser === $scope.user.uid;
           });
         }
+
+        $scope.transactions.forEach(transaction => {
+          if (transaction.fromUser === $scope.user.uid) {
+            transaction.fromUserName = "You";
+          } else if (transaction.toUser === $scope.user.uid) {
+            transaction.toUserName = "You";
+          }
+        });
       });
     });
 
