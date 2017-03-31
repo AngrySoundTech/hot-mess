@@ -77,16 +77,6 @@ angular.module('hotMessApp')
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/account', {
-        templateUrl: 'views/account.html',
-        controller: 'AccountCtrl',
-        resolve: {
-          "currentAuth": ["auth", function (auth) {
-            // returns a promisse so the resolve waits for it to complete
-            return auth.$requireSignIn();
-          }]
-        }
-      })
       .when('/chat', {
         templateUrl: 'views/chat.html',
         controller: 'Chat',
