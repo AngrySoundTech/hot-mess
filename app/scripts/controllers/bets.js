@@ -90,6 +90,17 @@ angular.module('hotMessApp')
               money: targetUserAmount + Math.floor(winnings)
             });
           });
+
+          // Add transaction to database
+          let transactionsRef = firebase.database().ref('transactions/');
+          transactionsRef.push({
+            bet: true,
+            toUser: bet.uid,
+            amount: Math.floor(winnings),
+            toUserName: bet.displayName,
+            time: firebase.database.ServerValue.TIMESTAMP,
+            description: $scope.currentBet.description
+          });
         });
       });
 
