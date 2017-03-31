@@ -1,1 +1,8 @@
 <h2>Stats</h2>
+
+Total Money: {{totalMoney?  totalMoney : 0 | currency : $ : 0}}<br>
+------<br>
+
+<ANY ng-repeat="user in users">
+  {{user.displayName}}: {{user.money? user.money : 0 | currency : $ : 0}}<br>
+</ANY>
