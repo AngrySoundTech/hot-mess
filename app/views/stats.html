@@ -3,5 +3,6 @@
 <h4>Ranking</h4>
 
 <div style="font-size: larger" ng-repeat="user in users">
+  <img ng-src="{{user.photoURL}}" />
   {{user.displayName}}: {{user.money? user.money : 0 | currency : $ : 0}}<br>
 </div>

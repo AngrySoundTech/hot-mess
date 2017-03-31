@@ -17,7 +17,8 @@ angular.module('hotMessApp')
         let userRef = firebase.database().ref("users/" +authData.uid);
         firebase.database().ref("users/" + authData.uid).update({
           uid: authData.uid,
-          displayName: authData.displayName
+          displayName: authData.displayName,
+          photoURL: authData.photoURL
         });
 
         // Set money to zero if they don't have any (temporary workaround)
