@@ -1,8 +1,7 @@
-<h2>Stats</h2>
+<h3>Stats</h3>
+<h5>Total Money: {{totalMoney?  totalMoney : 0 | currency : $ : 0}}</h5>
+<h4>Ranking</h4>
 
-Total Money: {{totalMoney?  totalMoney : 0 | currency : $ : 0}}<br>
-------<br>
-
-<ANY ng-repeat="user in users">
+<div style="font-size: larger" ng-repeat="user in users">
   {{user.displayName}}: {{user.money? user.money : 0 | currency : $ : 0}}<br>
-</ANY>
+</div>
