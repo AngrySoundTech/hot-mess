@@ -6,7 +6,8 @@
   <md-list-item ng-repeat="user in users" class="md-2-line">
     <img ng-src="{{ user.photoURL }}" class="md-avatar" alt="{{ user.displayName }}" />
     <div class="md-list-item-text">
-      <h3>{{user.displayName}}: {{user.money ? user.money : 0 | currency : $ : 0}}</h3>
+      <h3>{{$index + 1}}. {{ user.displayName}}</h3>
+      <p>{{user.money ? user.money : 0 | currency : $ : 0}}</p>
     </div>
   </md-list-item>
 </md-list>
