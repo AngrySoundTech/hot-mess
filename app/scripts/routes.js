@@ -68,6 +68,17 @@ angular.module('hotMessApp')
         templateUrl: 'views/transactions.html',
         controller: 'TransCtrl',
         resolve: {
+          "mine": () => {return false},
+          "currentAuth": ["auth", function (auth) {
+            return auth.$waitForSignIn();
+          }]
+        }
+      })
+      .when('/mine', {
+        templateUrl: 'views/transactions.html',
+        controller: 'TransCtrl',
+        resolve: {
+          "mine": () => {return true},
           "currentAuth": ["auth", function (auth) {
             return auth.$waitForSignIn();
           }]

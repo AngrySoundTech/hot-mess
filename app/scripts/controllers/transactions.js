@@ -1,13 +1,20 @@
 'use strict';
 
 angular.module('hotMessApp')
-  .controller('TransCtrl', ["$scope", "$rootScope", "$timeout", "$location", "currentAuth", function ($scope, $rootScope, $timeout, $location, currentAuth) {
+  .controller('TransCtrl', ["$scope", "$rootScope", "$timeout", "$location", "currentAuth", "mine", function ($scope, $rootScope, $timeout, $location, currentAuth, mine) {
     $scope.user = currentAuth;
 
-    let transactionsRef = firebase.database().ref('transactions/').limitToLast(20);
+
+    let transactionsRef = firebase.database().ref('transactions/');
     transactionsRef.on('value', function (transactions) {
       $timeout(function () {
         $scope.transactions = objectToList(transactions.val());
+
+        if (mine) {
+          $scope.transactions = $scope.transactions.filter(transaction => {
+            return transaction.fromUser === $scope.user.uid || transaction.toUser === $scope.user.uid;
+          });
+        }
       });
     });
 
