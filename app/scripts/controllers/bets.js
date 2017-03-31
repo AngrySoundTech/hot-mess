@@ -35,6 +35,7 @@ angular.module('hotMessApp')
     };
 
     $scope.betOn = (betAmount, option) => {
+      betAmount = Math.floor(betAmount);
       if (betAmount >= 1 && (option === 'option1' || option === 'option2')) {
         firebase.database().ref('bets/active/' + $routeParams.id).once('value').then((bet) => {
           if (!(bet.child('betsOn-option1/'+$scope.user.uid).exists() || bet.child('betsOn-option2/+'+$scope.user.uid).exists())) {
