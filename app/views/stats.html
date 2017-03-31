@@ -2,7 +2,11 @@
 <h5>Total Money: {{totalMoney?  totalMoney : 0 | currency : $ : 0}}</h5>
 <h4>Ranking</h4>
 
-<div style="font-size: larger" ng-repeat="user in users">
-  <img ng-src="{{user.photoURL}}" />
-  {{user.displayName}}: {{user.money? user.money : 0 | currency : $ : 0}}<br>
-</div>
+<md-list>
+  <md-list-item ng-repeat="user in users" class="md-2-line">
+    <img ng-src="{{ user.photoURL }}" class="md-avatar" alt="{{ user.displayName }}" />
+    <div class="md-list-item-text">
+      <h3>{{user.displayName}}: {{user.money ? user.money : 0 | currency : $ : 0}}</h3>
+    </div>
+  </md-list-item>
+</md-list>
