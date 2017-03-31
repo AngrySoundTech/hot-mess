@@ -10,3 +10,8 @@ Run `grunt` for building and `grunt serve` for preview.
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+
+## Deploying
+
+1. Run `grunt build`
+2. Run `firebase deploy`
