@@ -108,16 +108,18 @@ angular.module('hotMessApp')
             $scope.currentBet = bet.val();
             $scope.hasPlacedBet = bet.child('betsOn-option1/' + $scope.user.uid).exists() || bet.child('betsOn-option2/'+$scope.user.uid).exists();
           });
+        } else {
+          $location.path('/bets');
         }
       });
-      inactiveBetsRef.child(id).on('value', (bet) => {
-        if (bet.val()) {
-          $timeout(() => {
-            $scope.currentBet = bet.val();
-            $scope.hasPlacedBet = bet.child('betsOn-option1/' + $scope.user.uid).exists() || bet.child('betsOn-option2/'+$scope.user.uid).exists();
-          });
-        }
-      });
+      // inactiveBetsRef.child(id).on('value', (bet) => {
+      //   if (bet.val()) {
+      //     $timeout(() => {
+      //       $scope.currentBet = bet.val();
+      //       $scope.hasPlacedBet = bet.child('betsOn-option1/' + $scope.user.uid).exists() || bet.child('betsOn-option2/'+$scope.user.uid).exists();
+      //     });
+      //   }
+      // });
     }
 
   }]);
