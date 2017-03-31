@@ -8,6 +8,7 @@ angular.module('hotMessApp').controller('StatsCtrl', ["$scope", "auth", "current
   firebase.database().ref('/users/').on('value', users => {
     //users = users.val();
     let total = 0;
+    $scope.users = [];
     users.forEach(user => {
       total += user.val().money;
       $scope.users.push(user.val());
