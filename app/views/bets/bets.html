@@ -1,4 +1,4 @@
-<ul class="mdl-list">
+<!--<ul class="mdl-list">
   <a ng-repeat="bet in activeBets | reverse" href="#!/bets/view/{{bet._key}}">
     <div>
       <li class="mdl-list__item mdl-list__item--three-line">
@@ -11,9 +11,22 @@
       <hr>
     </div>
   </a>
-</ul>
+</ul> -->
+
+<md-list flex>
+  <div ng-repeat="bet in activeBets | reverse">
+    <md-list-item class="md-2-line" ng-href="#!/bets/view/{{bet._key}}">
+      <div class="md-list-item-text" layout="column">
+        <h3 style="white-space: normal;">{{ bet.description }}</h3>
+        <p>By {{ bet.creatorDisplayName }}</p>
+      </div>
+    </md-list-item>
+    <md-divider></md-divider>
+  </div>
+</md-list>
+
 
 <!-- Colored FAB button with ripple -->
-<a href="#!/bets/create" class="fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+<a ng-href="#!/bets/create" class="fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
   <i class="material-icons">add</i>
 </a>

@@ -1,16 +1,3 @@
-<!--<ul class="mdl-list">
-
-<div ng-repeat="transaction in transactions | reverse">
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <span>{{ transaction.fromUserName }} paid {{ transaction.toUserName }}</span>
-      <span class="mdl-list__item-text-body">{{ transaction.description }}</span>
-    </span>
-    <span class="mdl-list__item-secondary-content">{{ transaction.amount | currency : $ : 0 }}</span>
-  </li>
-  <hr>
-</div>
-</ul>-->
 
 <md-list flex>
   <div ng-repeat="transaction in transactions | reverse">
@@ -26,6 +13,6 @@
 </md-list>
 
 <!-- Colored FAB button with ripple -->
-<a href="#!/pay" class="fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+<a ng-href="#!/pay" class="fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
   <i class="material-icons">add</i>
 </a>

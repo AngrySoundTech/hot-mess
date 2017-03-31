@@ -31,8 +31,11 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Hot Menu</span>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="#!/">Send Monies</a>
-      <a class="mdl-navigation__link" href="#!/bets/">Bet Monies</a>
+      <a class="mdl-navigation__link" ng-href="#!/">Send Monies</a>
+      <a class="mdl-navigation__link" ng-href="#!/">My Monies (fix link)</a>
+      <a class="mdl-navigation__link" ng-href="#!/bets/">Bet Monies</a>
+      <a class="mdl-navigation__link" ng-href="#!/stats">Status</a>
+      <a class="mdl-navigation__link" ng-if="user.admin" ng-href="#!/admin">Admin</a>
     </nav>
   </div>
   <main class="mdl-layout__content">
