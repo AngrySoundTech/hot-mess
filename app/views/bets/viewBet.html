@@ -1,7 +1,7 @@
 <h2>{{currentBet.description}}</h2>
 <h5>Created by {{currentBet.creatorDisplayName}}</h5>
 
-<h4>Current Pool: {{currentBet.pool | currency : $ : 0}}</h4>
+<h4>Current Pool: {{currentBet.pool ? currentBet.pool : 0 | currency : $ : 0}}</h4>
 
 <div ng-if="!hasPlacedBet">
   <form ng-submit="betOn(betAmount, option)">
