@@ -1,20 +1,15 @@
 'use strict';
 
 // Ripped straight from the pay controller. God have mercy on my soul
-angular.module('hotMessApp').controller('AdminCtrl', ["$scope", "auth", "currentAuth", "$location", "$timeout", function ($scope, auth, currentAuth, $location, $timeout) {
+angular.module('hotMessApp').controller('AdminCtrl', ["$scope", "$rootScope", "auth", "currentAuth", "$location", "$timeout", function ($scope, $rootScope, auth, currentAuth, $location, $timeout) {
   $scope.user = currentAuth;
 
   // Redirect user if they're not admin
-  // I'm rushing so this is ugly as hell
-  const currentUserRef = firebase.database().ref('users/' + $scope.user.uid);
-  currentUserRef.once('value').then((user) => {
-    user = user.val();
-    if (!user.admin) {
-      $timeout(() => {
-        $location.path('/');
-      });
-    }
-  });
+  if (!$rootScope.admin) {
+    $timeout(() => {
+      $location.path('/');
+    });
+  }
 
   let usersRef = firebase.database().ref('users/');
   usersRef.once('value').then(function (snapshot) {

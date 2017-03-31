@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hotMessApp')
-  .controller('TransCtrl', ["$scope","$rootScope", "$timeout", "$location", "currentAuth", function ($scope, $rootScope, $timeout, $location, currentAuth) {
+  .controller('TransCtrl', ["$scope", "$rootScope", "$timeout", "$location", "currentAuth", function ($scope, $rootScope, $timeout, $location, currentAuth) {
     $scope.user = currentAuth;
 
     let transactionsRef = firebase.database().ref('transactions/').limitToLast(20);
@@ -26,5 +26,12 @@ angular.module('hotMessApp')
           }
           loaded = true;
         });
+    });
+
+    let adminRef = firebase.database().ref('users/' + currentAuth.uid + '/admin');
+    adminRef.on('value', admin => {
+      $timeout(() => {
+        $rootScope.admin = admin.val();
+      });
     });
   }]);
