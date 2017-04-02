@@ -1,7 +1,8 @@
 # hot-mess
 
-This project is generated with [yo angularfire-express generator](https://github.com/matheushf/generator-angularfire-express)
-version 1.1.2.
+This web app was made for RIT Tech Crew's 2017 Relay for Life fundraiser with Firebase and Angular.
+
+Having to be made in a week however, there are many glaring flaws and this should not be seen as a strong example of our work.
 
 ## Build & development
 
